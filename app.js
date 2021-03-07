@@ -26,27 +26,28 @@ function fetchVideos() {
   if (!IDlist.length) {
     return;
   }
+
   fetch(`${URL}&id=${IDlist}&part=snippet`)
     .then((res) => res.json())
     .then((data) => {
       addLoader();
       data.items.map((item) => {
         let node = `<iframe
-        width="300"
-        height="250"
-        src="https://www.youtube.com/embed/${item.id}"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        class='iframe-style'
-      ></iframe>
-      <div class="vid-wrapper">
-      <div class="vid-title">
-      ${item.snippet.title}
-      </div>
-      <div class="vid-small">samll title</div>
-      </div>
-      `;
+    width="300"
+    height="250"
+    src="https://www.youtube.com/embed/${item.id}"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+    class='iframe-style'
+  ></iframe>
+  <div class="vid-wrapper">
+  <div class="vid-title">
+  ${item.snippet.title}
+  </div>
+  <div class="vid-small">samll title</div>
+  </div>
+  `;
         let videoPlayer = document.createElement("div");
         videoPlayer.id = "video-player";
         videoPlayer.insertAdjacentHTML("afterbegin", node);
@@ -70,7 +71,11 @@ window.addEventListener(
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
     if (scrollTop + clientHeight >= scrollHeight - 10) {
-      fetchVideos();
+      let timer = setTimeout(() => {
+        fetchVideos();
+      }, 1000);
+      timer();
+      // clearTimeout(timer);
     }
   },
   {
@@ -83,7 +88,11 @@ window.addEventListener(
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
     if (scrollTop + clientHeight >= scrollHeight - 10) {
-      fetchVideos();
+      let timer = setTimeout(() => {
+        fetchVideos();
+      }, 1000);
+      timer();
+      // clearTimeout(timer);
     }
   },
   {
@@ -101,11 +110,11 @@ themeSwitch.addEventListener("change", () => {
 //Loader
 
 function addLoader() {
-  document.getElementById("loader").style.visibility = "visible";
+  document.getElementById("loader").style.display = "block";
   return;
 }
 
 function removeLoader() {
-  document.getElementById("loader").style.visibility = "hidden";
+  document.getElementById("loader").style.display = "none";
   return;
 }
