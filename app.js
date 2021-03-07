@@ -58,6 +58,7 @@ function fetchVideos() {
 }
 fetchVideos();
 
+//Scroll Loader
 window.addEventListener(
   "scroll",
   () => {
@@ -71,6 +72,21 @@ window.addEventListener(
     passive: true,
   }
 );
+window.addEventListener(
+  "touchmove",
+  () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+      fetchVideos();
+    }
+  },
+  {
+    passive: true,
+  }
+);
+
+//Theme Switch
 const themeSwitch = document.querySelector("input");
 
 themeSwitch.addEventListener("change", () => {
