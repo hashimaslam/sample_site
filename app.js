@@ -73,8 +73,7 @@ window.addEventListener(
     if (scrollTop + clientHeight >= scrollHeight - 10) {
       let timer = setTimeout(() => {
         fetchVideos();
-      }, 1000);
-      timer();
+      }, 500);
       // clearTimeout(timer);
     }
   },
@@ -90,8 +89,7 @@ window.addEventListener(
     if (scrollTop + clientHeight >= scrollHeight - 10) {
       let timer = setTimeout(() => {
         fetchVideos();
-      }, 1000);
-      timer();
+      }, 500);
       // clearTimeout(timer);
     }
   },
