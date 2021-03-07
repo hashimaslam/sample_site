@@ -82,7 +82,7 @@ window.addEventListener(
   () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-    if (scrollTop + clientHeight >= scrollHeight - 5) {
+    if (scrollTop + clientHeight >= scrollHeight) {
       fetchVideos();
     }
   },
