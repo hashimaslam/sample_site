@@ -22,7 +22,7 @@ let IDlist;
 function fetchVideos() {
   IDlist = videoIds.slice(start, limit).join(",");
   console.log(IDlist);
-
+  console.log(start, limit);
   if (!IDlist.length) {
     return;
   }
@@ -54,13 +54,12 @@ function fetchVideos() {
         document.getElementById("container").appendChild(videoPlayer);
       });
       removeLoader();
+      start = start + 3;
+      limit += 3;
     })
     .catch((err) => {
       removeLoader();
     });
-
-  start = start + 3;
-  limit += 3;
 }
 fetchVideos();
 
@@ -68,12 +67,11 @@ fetchVideos();
 window.addEventListener(
   "scroll",
   () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const { scrollTop, scrollHeight } = document.documentElement;
 
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
-      let timer = setTimeout(() => {
-        fetchVideos();
-      }, 500);
+    if (scrollTop + window.innerHeight > scrollHeight - 10) {
+      console.log(scrollTop, window.innerHeight, scrollHeight);
+      fetchVideos();
       // clearTimeout(timer);
     }
   },
@@ -84,9 +82,10 @@ window.addEventListener(
 window.addEventListener(
   "touchmove",
   () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const { scrollTop, scrollHeight } = document.documentElement;
 
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
+    if (scrollTop + window.innerHeight > scrollHeight - 10) {
+      console.log(scrollTop, scrollHeight, clientHeight);
       let timer = setTimeout(() => {
         fetchVideos();
       }, 500);
