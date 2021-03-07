@@ -29,6 +29,7 @@ function fetchVideos() {
   fetch(`${URL}&id=${IDlist}&part=snippet`)
     .then((res) => res.json())
     .then((data) => {
+      addLoader();
       data.items.map((item) => {
         let node = `<iframe
         width="300"
@@ -51,6 +52,10 @@ function fetchVideos() {
         videoPlayer.insertAdjacentHTML("afterbegin", node);
         document.getElementById("container").appendChild(videoPlayer);
       });
+      removeLoader();
+    })
+    .catch((err) => {
+      removeLoader();
     });
 
   start = start + 3;
@@ -92,3 +97,15 @@ const themeSwitch = document.querySelector("input");
 themeSwitch.addEventListener("change", () => {
   document.body.classList.toggle("dark-theme");
 });
+
+//Loader
+
+function addLoader() {
+  document.getElementById("loader").style.visibility = "visible";
+  return;
+}
+
+function removeLoader() {
+  document.getElementById("loader").style.visibility = "hidden";
+  return;
+}
